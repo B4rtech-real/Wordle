@@ -1,19 +1,22 @@
-import random
+import requests
 
-def randomSelection():
-    n = []
-    i = 0
-    while i < 5:
-        i += 1
-        n.append(random.randrange(1, 10))
-    return n
+def guessed_word():
+    url = "https://random-word-api.herokuapp.com/word?length=7"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        word = response.json()[0]
+        return word
+    else:
+        raise Exception("Failed to fetch word")
 
 def input_check():
     while True:
         try:
-            number = int(input("Wybierz liczbę od 1 do 9: "))
-            if number in range(1, 10):
-                return number
+            player_word = input("Zgadnij jakie pięcio literowe słowo wybrałem:"))
+            if len(player_word) == 5:
+                return player_word
+
             else:
                 print("Podana liczba jest poza zakresem. Spróbuj jeszcze raz.")
         except ValueError:
