@@ -1,0 +1,32 @@
+import funkcje
+
+def main():
+    comp_list = funkcje.randomSelection()
+    i = 0
+    for i in range(10):
+        player_list = []
+        check_list = []
+        for n in range(5):
+            player_answer = funkcje.input_check()
+            if player_answer == comp_list[n]:
+                check_list.append(1)
+            elif player_answer in comp_list:
+                check_list.append(0)
+            else:
+                check_list.append(-1)
+            player_list.append(player_answer)
+        if check_list.count(1) == 5:
+            print(player_list)
+            print(check_list)
+            print("Gratuluję! Wygrana!")
+            return
+        else:
+            print("Niestety nie. W rundzie ", str(i+1), " nie zgadłeś: ")
+            print(player_list)
+            print(check_list)
+            print("Spróbuj jeszcze raz")
+
+    print("Niestety nie. Liczby to: " + str(comp_list) + "Zagraj ponownie.")
+    exit()
+if __name__ == '__main__':
+    main()
